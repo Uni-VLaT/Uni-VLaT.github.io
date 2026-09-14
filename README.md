@@ -2,24 +2,16 @@
 
 Anonymous project website for **Uni-VLaT: Whole-Body Tactile Adaptation of VLA Policies for Humanoid Loco-Manipulation**.
 
-The page uses anonymous authorship. PDF and Code are visible as coming-soon resources without outgoing links. The arXiv entry is omitted.
+Static HTML, CSS, and JavaScript. All figures and fonts are served locally; there are no analytics or external embeds. PDF and Code remain unavailable pending anonymous release artifacts.
 
-## Content
+## Evaluation
 
-The text and figures reflect the manuscript read on 2026-09-12. Main results use 50 demonstrations per task and 20 evaluation rollouts per method–task configuration. Partial ablations remain marked as incomplete. No rollout count is asserted for ablations because the manuscript's setup and later descriptions differ.
+The website includes the main five-task evaluation, contact-response analysis, cross-policy evaluation, and complete predictive-context ablations. Main Isaac-GR00T configurations use 20 rollouts. The cross-policy π0.5 configurations and non-full ablations use 10 rollouts; Full Uni-VLaT reuses the main evaluation. DP has no measured success rate because deployment constraints rejected its outputs before execution.
 
-The manuscript project was accessed read only. The website is maintained separately.
+## Development
 
-## Files
+Serve this directory with any static HTTP server. No build step is required. Figures can be enlarged with mouse or keyboard; Escape closes the viewer. Tables scroll horizontally on narrow screens.
 
-- `index.html`: project description, tasks, method, results, and provisional citation.
-- `style.css` and `script.js`: page layout and interactions.
-- `assets/`: locally hosted figures, favicon, and fonts with their licenses.
+Only anonymous project identities should author commits. Do not add author details, institutional logos, personal URLs, document metadata, or unredacted media. The source manuscript PDF is not included in this repository.
 
-All resource paths are relative. No build step or external tracking service is used. Layout reference: [VideoMimic](https://www.videomimic.net/). The implementation is independently authored; self-hosted fonts retain their OFL licenses.
-
-## Anonymous publication
-
-Publish a fresh copy from the anonymous project account. Do not fork or transfer the personal repository or copy its Git history. The anonymous export contains only the current website and its required assets, without the old manuscript PDF or personal repository metadata.
-
-Keep the PDF and Code entries inactive until anonymous release artifacts are ready. A coming-soon entry does not grant or restrict access to files hosted elsewhere.
+Layout reference: [VideoMimic](https://www.videomimic.net/). Independently authored implementation. Self-hosted fonts retain their accompanying OFL licenses.

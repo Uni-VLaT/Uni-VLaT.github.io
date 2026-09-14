@@ -20,17 +20,35 @@ document.querySelectorAll('.video-gallery-section').forEach(section => {
   track.querySelectorAll('img').forEach(img => img.addEventListener('load', updateButtons));
   updateButtons();
 });
-document.getElementById('copy-citation').addEventListener('click', async () => {
-  const code = document.getElementById('citation-text');
-  const status = document.getElementById('copy-status');
-  try {
-    await navigator.clipboard.writeText(code.textContent);
-    status.textContent = 'Provisional BibTeX copied.';
-  } catch {
-    const range = document.createRange();
-    range.selectNodeContents(code);
-    const selection = window.getSelection();
-    selection.removeAllRanges(); selection.addRange(range);
-    status.textContent = 'Citation selected. Press Control+C or Command+C to copy.';
-  }
+const dialog = document.getElementById('figure-dialog');
+const enlarged = document.getElementById('dialog-image');
+document.querySelectorAll('main > img, .approach-image, .research-figure img').forEach(img => {
+  const button = document.createElement('button');
+  button.type = 'button'; button.className = 'figure-open';
+  button.setAttribute('aria-label', `Enlarge figure: ${img.alt}`);
+  img.before(button); button.append(img);
+  button.addEventListener('click', () => {
+    enlarged.src = img.src; enlarged.alt = img.alt;
+    document.getElementById('dialog-caption').textContent = img.alt;
+    dialog.showModal();
+  });
 });
+dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+dialog.addEventListener('click', event => {
+  const box = dialog.getBoundingClientRect();
+  if (event.target === dialog && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom)) dialog.close();
+});
+const links = [...document.querySelectorAll('.toc a')];
+const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const markSection = () => {
+  const current = sections.filter(el => el.getBoundingClientRect().top <= 120).at(-1) || sections[0];
+  links.forEach(a => {
+    if (a.hash === `#${current.id}`) a.setAttribute('aria-current', 'location');
+    else a.removeAttribute('aria-current');
+  });
+};
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) { ticking = true; requestAnimationFrame(() => { markSection(); ticking = false; }); }
+}, {passive:true});
+markSection();
